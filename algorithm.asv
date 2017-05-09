@@ -1,0 +1,31 @@
+clc; clear all; clear global; clear variables; close all;
+% figure; hold on; grid on;
+% axis square;
+
+N = 4;
+% Robots
+X = [([5, 5])
+     ([2, 4])
+     ([4, 4])
+     ([5, 1])
+    ];
+% Formation
+P = [([3,3])
+     ([2,2])
+     ([5,9])
+     ([1,0])
+    ];
+        
+centroid = sum(P)./N
+for i=1:N
+    P(i,:) = P(i,:)-centroid;
+end
+centroid = sum(P)./N
+
+Tau = 0;
+Theta = 0;
+
+L = 0;
+for i=1:N
+    L = L + norm(R(theta)*P(i,:)+tau-X(i,:))^2
+end
